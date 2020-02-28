@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" th:src="@{/js/jquery-3.1.1.js}"></script>
+</head>
+<body>
+<center>
+    <form th:action="@{/upd_do}" th:method="post" th:object="${productVO}" id="form">
+        <input type="hidden" th:value="*{productid}" th:name="productid"/>
+        产品名称：<input th:name="productname" th:value="*{productname}" id="productname"/><br>
+        生产日期：<input th:name="producetime" th:value="${#dates.format(productVO.producetime,'yyyy-MM-dd hh:mm:ss')}" id="producetime"/><br>
+        产品产商：<select th:name="providerid">
+        <option th:each="p:${providerDBS}" th:value="${p.providerid}" th:text="${p.providername}" th:selected="${p.providerid==productVO.providerid}"></option>
+    </select><br>
+        <input type="button" value="修改" onclick="asd()">
+    </form>
+</center>
+</body>
+<script>
+    function asd() {
+        if ($("#productname").val() == '') {
+            alert("产品名称不能为空")
+        } else if ($("#producetime").val() == '') {
+            alert("生产日期不能为空")
+        } else {
+            document.getElementById('form').submit()
+        }
+    }
+</script>
+</html>

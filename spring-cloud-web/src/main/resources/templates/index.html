@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" th:src="@{/js/jquery-3.1.1.js}"></script>
+</head>
+<body>
+<script>
+
+</script>
+<center>
+        <a th:href="@{/addproduct}" th:text="添加" style="margin-left: 200px"></a>
+        <table border="1" cellspacing="0" style="text-align: center">
+            <tr>
+                <td>产品编号</td>
+                <td>产品名称</td>
+                <td>生产日期</td>
+                <td>产品产商</td>
+                <td>操作</td>
+            </tr>
+            <tr th:each="c:${productVOS}">
+                <td th:text="${c.productid}"></td>
+                <td th:text="${c.productname}"></td>
+                <td th:text="${#dates.format(c.producetime,'yyyy-MM-dd hh:mm:ss')}"></td>
+                <td th:text="${c.providername}"></td>
+                <td>
+                    <a th:href="@{/updproduct(productid=${c.productid})}" th:text="修改"></a>
+                    <a th:href="@{/delproduct(productid=${c.productid})}" onclick='return confirm("真的要删除吗?")' th:text="删除"></a>
+                </td>
+            </tr>
+        </table>
+</center>
+</body>
+</html>

@@ -1,0 +1,16 @@
+server:
+  port: 8765
+
+spring:
+  application:
+    name: productweb
+  profiles:
+    active: dev
+  cloud:
+    config:
+      uri: http://localhost:8762
+      fail-fast: true
+ribbon:
+  ReadTimeout: 60000   #default=1000
+  ConnectTimeout: 60000  #default=1000
+  maxAutoRetries: 0 #调用失败的重试次数

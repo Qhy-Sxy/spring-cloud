@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.mapper.ProductMapper">
+    <select id="selectProduct" resultType="productVO">
+        SELECT
+          productid,productname,producetime,providername
+        FROM
+          product , provider
+        where
+          product.providerid=provider.providerid
+    </select>
+    <insert id="add" parameterType="productVO">
+       insert into product(productname,producetime,providerid)
+               values(#{productname},#{producetime},#{providerid})
+    </insert>
+    <select id="selectproduct" parameterType="int" resultType="productVO">
+        select * from product where productid=#{productid}
+    </select>
+    <update id="updateproduct" parameterType="productVO">
+        update product set productname=#{productname},producetime=#{producetime}
+                           ,providerid=#{providerid} where productid=#{productid}
+    </update>
+    <delete id="delproduct" parameterType="int">
+        delete from product where productid=#{productid}
+    </delete>
+</mapper>
